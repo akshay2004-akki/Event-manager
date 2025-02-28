@@ -1,7 +1,7 @@
 function Hero() {
   return (
     <>
-      <div className="flex translate-y-[60px] flex-col items-center justify-center min-h-screen bg-white text-center p-8">
+      <div className="flex font-poppins translate-y-[60px] flex-col items-center justify-center min-h-screen bg-white text-center p-8">
       {/* Heading Section */}
       <h1 className="text-4xl font-bold text-gray-900">
         Connect, Engage, and Elevate Your Campus Experience
