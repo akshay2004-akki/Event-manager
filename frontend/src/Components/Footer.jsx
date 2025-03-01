@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"; // Import Link from React Router
 import logo from '../assets/logo.jpg'
 const Footer = () => {
   return (
-    <footer className="bg-white border-t border-gray-300 py-10">
+    <footer className="bg-white border-t translate-y-[60px] border-gray-300 py-10">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-8">
         {/* Logo */}
         <div className="col-span-1">

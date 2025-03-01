@@ -1,9 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link  } from "react-router-dom";
 import logo from "../assets/logo.jpg";
 
 function Navbar() {
   const [toggle, setToggle] = useState(false);
+
+  window.onscroll = ()=>{
+    setToggle(false);
+  }
+  const handlLinkToggle = ()=>{
+    setToggle(false)
+  }
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
@@ -15,10 +22,10 @@ function Navbar() {
           </div>
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex md:gap-6 ml-6 text-gray-800 font-medium">
-            <Link to="/" className="hover:text-amber-500">Home</Link>
-            <Link to="/calendar" className="hover:text-amber-500">Events</Link>
-            <Link to="/eventRegistration" className="hover:text-amber-500">Event Registration</Link>
-            <Link to="/support" className="hover:text-amber-500">Chat Support</Link>
+            <Link onClick={handlLinkToggle} to="/" className="hover:text-amber-500">Home</Link>
+            <Link onClick={handlLinkToggle} to="/calendar" className="hover:text-amber-500">Events</Link>
+            <Link onClick={handlLinkToggle} to="/eventRegistration" className="hover:text-amber-500">Event Registration</Link>
+            <Link onClick={handlLinkToggle} to="/support" className="hover:text-amber-500">Chat Support</Link>
           </div>
         </div>
 
@@ -50,10 +57,10 @@ function Navbar() {
         }`}
       >
         <div className="flex flex-col gap-3">
-          <Link to="/" className="hover:text-amber-400">Home</Link>
-          <Link to="/calendar" className="hover:text-amber-400">Events</Link>
-          <Link to="/eventRegistration" className="hover:text-amber-400">Event Registration</Link>
-          <Link to="/support" className="hover:text-amber-400">Chat Support</Link>
+          <Link onClick={handlLinkToggle} to="/" className="hover:text-amber-400">Home</Link>
+          <Link onClick={handlLinkToggle} to="/calendar" className="hover:text-amber-400">Events</Link>
+          <Link onClick={handlLinkToggle} to="/eventRegistration" className="hover:text-amber-400">Event Registration</Link>
+          <Link onClick={handlLinkToggle} to="/support" className="hover:text-amber-400">Chat Support</Link>
         </div>
       </div>
     </nav>

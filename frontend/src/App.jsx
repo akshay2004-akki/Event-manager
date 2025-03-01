@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import Team from "./Components/Team.jsx"
 import FAQ from "./Components/FAQ.jsx"
 import Footer from "./Components/Footer.jsx"
+import EventsPage from "./Components/EventsPage.jsx"
 
 function App() {
 
@@ -24,7 +25,7 @@ function App() {
               <Team/>
               <FAQ/>
           </>}/>
-          <Route path="/eventRegistration" element={<></>} />
+          <Route path="/eventRegistration" element={<EventsPage/>} />
         </Routes>
         <Footer/>
       </Router>
