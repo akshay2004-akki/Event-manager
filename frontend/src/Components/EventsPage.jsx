@@ -37,7 +37,7 @@ const EventsPage = () => {
             <div key={index} className="p-4 border rounded-lg shadow-sm">
               <h3 className="text-lg font-semibold">{event.title}</h3>
               <p className="text-sm text-gray-500">{event.date}</p>
-              <p className="text-gray-700 mt-1 p-2">{event.description}</p>
+              <p className="text-gray-700 mt-1 p-2">{event.description.slice(0,40)}...</p>
               <button className="border p-2 bg-black text-white">Event Details</button>
             </div>
           ))}

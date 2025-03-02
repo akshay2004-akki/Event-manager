@@ -23,7 +23,7 @@ function Navbar() {
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex md:gap-6 ml-6 text-gray-800 font-medium">
             <Link onClick={handlLinkToggle} to="/" className="hover:text-amber-500">Home</Link>
-            <Link onClick={handlLinkToggle} to="/calendar" className="hover:text-amber-500">Events</Link>
+            <Link onClick={handlLinkToggle} to="/events" className="hover:text-amber-500">Events</Link>
             <Link onClick={handlLinkToggle} to="/eventRegistration" className="hover:text-amber-500">Event Registration</Link>
             <Link onClick={handlLinkToggle} to="/support" className="hover:text-amber-500">Chat Support</Link>
           </div>
@@ -58,7 +58,7 @@ function Navbar() {
       >
         <div className="flex flex-col gap-3">
           <Link onClick={handlLinkToggle} to="/" className="hover:text-amber-400">Home</Link>
-          <Link onClick={handlLinkToggle} to="/calendar" className="hover:text-amber-400">Events</Link>
+          <Link onClick={handlLinkToggle} to="/events" className="hover:text-amber-400">Events</Link>
           <Link onClick={handlLinkToggle} to="/eventRegistration" className="hover:text-amber-400">Event Registration</Link>
           <Link onClick={handlLinkToggle} to="/support" className="hover:text-amber-400">Chat Support</Link>
         </div>

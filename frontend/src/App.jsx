@@ -8,6 +8,8 @@ import Team from "./Components/Team.jsx"
 import FAQ from "./Components/FAQ.jsx"
 import Footer from "./Components/Footer.jsx"
 import EventsPage from "./Components/EventsPage.jsx"
+import CreateEvents from "./Components/CreateEvents.jsx"
+import EventDetails from "./Components/EventDetails.jsx"
 
 function App() {
 
@@ -26,6 +28,8 @@ function App() {
               <FAQ/>
           </>}/>
           <Route path="/eventRegistration" element={<EventsPage/>} />
+          <Route path="/events" element={<CreateEvents/>} />
+          <Route path="/events/:eventId" element = {<EventDetails/>} />
         </Routes>
         <Footer/>
       </Router>
