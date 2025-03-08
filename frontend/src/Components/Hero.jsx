@@ -1,4 +1,10 @@
+import { useNavigate } from "react-router-dom"
+
 function Hero() {
+  const route = useNavigate()
+  const handleLoginRoute = ()=>{
+    route("/login")
+  }
   return (
     <>
       <div className="flex font-poppins translate-y-[60px] flex-col items-center justify-center min-h-screen bg-white text-center p-8">
@@ -13,8 +19,8 @@ function Hero() {
 
       {/* Buttons */}
       <div className="mt-6">
-        <button className="bg-black text-white px-6 py-2 mr-4">
-          Learn More
+        <button onClick={handleLoginRoute} className="bg-black text-white px-6 py-2 mr-4 hover:cursor-pointer">
+          Log in
         </button>
         <button className="bg-white border border-gray-900 text-gray-900 px-6 py-2">
           Sign Up

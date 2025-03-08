@@ -10,6 +10,7 @@ import Footer from "./Components/Footer.jsx"
 import EventsPage from "./Components/EventsPage.jsx"
 import CreateEvents from "./Components/CreateEvents.jsx"
 import EventDetails from "./Components/EventDetails.jsx"
+import Login from "./Components/Login.jsx"
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/eventRegistration" element={<EventsPage/>} />
           <Route path="/events" element={<CreateEvents/>} />
           <Route path="/events/:eventId" element = {<EventDetails/>} />
+          <Route path="/login" element = {<Login/>} />
         </Routes>
         <Footer/>
       </Router>
