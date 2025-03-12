@@ -2,11 +2,18 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "author": "Akshay",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.12.1",
+    "nodemon": "^3.1.9"
+  }
 }
