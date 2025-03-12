@@ -1,19 +1,21 @@
 import React from "react";
+import arya from '../assets/arya.jpg'
+import akshay from '../assets/image.png'
 
 const teamMembers = [
   {
     name: "Akshay Anand",
-    role: "Project Lead | Fullstack Dev",
+    role: "Project Lead | Fullstack Developer",
     description:
       "Passionate about creating memorable experiences for students and organizers alike.",
-    image: "", // Add image URL here
+    image: akshay, // Add image URL here
   },
   {
     name: "Aarya Ratnam Sinha",
     role: "Frontend Developer",
     description:
       "Expert in promoting events and engaging with the student community effectively. Also Contricuted in the Frontend Development.",
-    image: "", // Add image URL here
+    image: arya, // Add image URL here
   },
   {
     name: "Abdul Fater",
