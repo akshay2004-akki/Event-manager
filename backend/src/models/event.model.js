@@ -43,8 +43,7 @@ const eventSchema = new mongoose.Schema({
     maxAttendees: { 
         type: Number, 
         default: 100 
-    }, // Event Capacity
-
+    },
     isPaid: { 
         type: Boolean, 
         default: false 
@@ -52,13 +51,13 @@ const eventSchema = new mongoose.Schema({
     ticketPrice: { 
         type: Number, 
         default: 0 
-    }, // If paid event
+    }, 
 
     images: [
         { 
             type: String 
         }
-    ], // Array to store event posters, banners
+    ], 
     status: { 
         type: String, 
         enum: ['Upcoming', 'Ongoing', 'Completed'], 
