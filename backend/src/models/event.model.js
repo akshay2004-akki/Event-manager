@@ -71,18 +71,7 @@ const eventSchema = new mongoose.Schema(
     eventImage: {
       type: String, // Assuming URL or file path to image
     },
-    attendees: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
     
-    status: {
-      type: String,
-      enum: ["Upcoming", "Ongoing", "Completed"],
-      default: "Upcoming",
-    },
   },
   { timestamps: true }
 );
