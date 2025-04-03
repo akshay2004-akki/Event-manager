@@ -1,9 +1,20 @@
 import { User } from "../models/user.model.js";
 
 export const register = async(req,res)=>{
-    const {username, fullname, email, password} = req.body;
-
-    if(!username || !fullname || !email || !password){
+    console.log(req.body);
+    if (typeof req.body === "string") {
+        console.log("🔹 Parsing String Body...");
+        try {
+            req.body = JSON.parse(req.body); // Manually parse JSON
+        } catch (error) {
+            console.log("❌ JSON Parsing Failed:", error);
+        }
+    }
+    
+    const {username, fullName, email, password} = req.body;
+    console.log(username,fullName,email,password);
+    
+    if(!username || !fullName || !email || !password){
         return res.status(400).json({error:"Fill the required fields"});
     }
 
@@ -14,7 +25,7 @@ export const register = async(req,res)=>{
 
     const newUser = await User.create({
         username,
-        fullname,
+        fullName,
         email,
         password
     })

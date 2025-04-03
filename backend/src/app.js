@@ -6,13 +6,18 @@ import bcrypt from 'bcryptjs'
 import passport from 'passport'
 import LocalStrategy from 'passport-local';
 import {User} from './models/user.model.js'
+import dotenv from 'dotenv'
+
+dotenv.config({path:".env"})
 
 const app = express()
 
 app.use(express.json({limit:"20kb"}))
 app.use(express.urlencoded({extended:true, limit:"20kb"}))
 app.use(express.static("public"))
-app.use(cors({credentials:true, origin:"http://localhost:5173"}))
+app.use(cors({credentials:true, origin:process.env.CORS_ORIGIN}))
+
+
 app.use(
     session({
       secret: process.env.SESSION_KEY, // Change this to a secure key
@@ -27,8 +32,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(
-  new LocalStrategy(async(username, password, done)=>{
-    const user = await User.findOne({username})
+  new LocalStrategy(async(email, password, done)=>{
+    console.log(email,password);
+    
+    const user = await User.findOne({email})
     if (!user) return done(null, false, { message: "User not found" });
 
     const isMatch = await bcrypt.compare(password, user.password);
