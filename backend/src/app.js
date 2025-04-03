@@ -2,6 +2,7 @@ import express from 'express'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import cors from 'cors'
+import bcrypt from 'bcryptjs'
 import passport from 'passport'
 import LocalStrategy from 'passport-local';
 import {User} from './models/user.model.js'
