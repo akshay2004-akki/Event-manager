@@ -23,7 +23,6 @@ const eventSchema = new mongoose.Schema(
       required: true,
     },
     coordinatorName: {
-      name: {
         type: String,
         required: true,
         trim: true,
@@ -33,36 +32,39 @@ const eventSchema = new mongoose.Schema(
         required: true,
         match: [/^\d{10}$/, "Please enter a valid 10-digit phone number"],
       },
+
       coordinatorEmail: {
         type: String,
         required: true,
         lowercase: true,
         match: [/.+@.+\..+/, "Please enter a valid email address"],
       },
-    },
+    
     club: {
       type: String,
       required: true,
       trim: true,
     },
+
     department: {
       type: String,
       required: true,
       trim: true,
     },
+
     facultyName: {
-      name: {
         type: String,
         required: true,
         trim: true,
       },
+
       facultyEmail: {
         type: String,
         required: true,
         lowercase: true,
         match: [/.+@.+\..+/, "Please enter a valid email address"],
       },
-    },
+
     description: {
       type: String,
       required: true,
@@ -73,7 +75,9 @@ const eventSchema = new mongoose.Schema(
     },
     
   },
+
   { timestamps: true }
+  
 );
 
 const Event = mongoose.model("Event", eventSchema);
