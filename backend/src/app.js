@@ -51,4 +51,8 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
+import userRoutes from './routes/user.routes.js'
+
+app.use("/api/users", userRoutes)
+
 export default app;

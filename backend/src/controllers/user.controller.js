@@ -7,7 +7,7 @@ export const register = async(req,res)=>{
         return res.status(400).json({error:"Fill the required fields"});
     }
 
-    const existedUser = await User.findOne({$or:[username, email]});
+    const existedUser = await User.findOne({email});
     if(existedUser){
         return res.status(400).json({error:"User Already exists"});
     }
@@ -24,4 +24,9 @@ export const register = async(req,res)=>{
     }
 
     return res.status(200).json(newUser);
+}
+
+
+export const login = async(req,res)=>{
+    res.json({ message: "Login successful", user: req.user });
 }
