@@ -1,6 +1,7 @@
 import { Router } from "express"
-import { register, login } from "../controllers/user.controller.js";
+import { profile, register } from "../controllers/user.controller.js";
 import passport from "passport";
+import { isAuthenticated } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
@@ -25,6 +26,8 @@ router.post("/logout", (req, res) => {
       res.json({ message: "Logout successful" });
     });
   });
+
+  router.post("/profile", isAuthenticated, profile)
 
 
 export default router;

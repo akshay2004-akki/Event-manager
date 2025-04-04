@@ -1,4 +1,5 @@
 import { User } from "../models/user.model.js";
+import { Profile } from "../models/profile.model.js";
 
 
 import bcrypt from "bcryptjs";
@@ -53,5 +54,26 @@ export const register = async (req, res) => {
 
 
 export const profile = async (req,res)=>{
+    try {
+        const userId = req.user?._id; // Get user ID from session (Passport)
+        const { department, phoneNumber, section, collegeName, semester } = req.body;
     
+        if (!userId || !department || !phoneNumber || !section || !collegeName || !semester) {
+          return res.status(400).json({ error: "All fields are required." });
+        }
+    
+        const newProfile = await Profile.create({
+          userId,
+          department,
+          phoneNumber,
+          section,
+          collegeName,
+          semester,
+        });
+    
+        return res.status(201).json({ message: "Profile created successfully", profile: newProfile });
+      } catch (error) {
+        console.error("Error creating profile:", error);
+        return res.status(500).json({ error: "Failed to create profile." });
+      }
 }

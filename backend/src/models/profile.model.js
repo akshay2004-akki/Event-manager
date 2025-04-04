@@ -27,3 +27,5 @@ const profileSchema = new Schema({
         required  : true
     }
 },{timestamps:true})
+
+export const Profile = mongoose.model("Profile" , profileSchema);
