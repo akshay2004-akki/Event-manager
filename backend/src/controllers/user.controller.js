@@ -1,15 +1,6 @@
 import { User } from "../models/user.model.js";
 
 export const register = async(req,res)=>{
-    console.log(req.body);
-    if (typeof req.body === "string") {
-        console.log("🔹 Parsing String Body...");
-        try {
-            req.body = JSON.parse(req.body); // Manually parse JSON
-        } catch (error) {
-            console.log("❌ JSON Parsing Failed:", error);
-        }
-    }
     
     const {username, fullName, email, password} = req.body;
     console.log(username,fullName,email,password);

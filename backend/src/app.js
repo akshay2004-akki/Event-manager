@@ -32,18 +32,26 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(
-  new LocalStrategy(async(email, password, done)=>{
-    console.log(email,password);
+  new LocalStrategy({ usernameField: "email", passwordField: "password" }, async (email, password, done) => {
+    const user = await User.findOne({ email }).select("+password");
     
-    const user = await User.findOne({email})
-    if (!user) return done(null, false, { message: "User not found" });
+    if (!user) {
+      console.warn("⚠️ User Not Found");
+      return done(null, false, { message: "User not found" });
+    }
+    
+    const isMatch = await bcrypt.compare(password, user.password); 
+    
+    if (!isMatch) {
+      console.warn("⚠️ Incorrect Password");
+      return done(null, false, { message: "Invalid credentials" });
+    }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return done(null, false, { message: "Invalid credentials" });
-
+    console.log("✅ Login Successful:", user.email);
     return done(null, user);
   })
-)
+);
+
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
