@@ -8,7 +8,7 @@ const profileSchema = new Schema({
     },
     department : {
         type : String,
-        required : true,
+        required : true, 
     },
     phoneNumber : {
         type : Number,
@@ -28,4 +28,4 @@ const profileSchema = new Schema({
     }
 },{timestamps:true})
 
-export const Profile = mongoose.model("Profile" , profileSchema);
+export const Profile = model("Profile" , profileSchema);

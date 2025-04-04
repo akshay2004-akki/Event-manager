@@ -3,6 +3,7 @@ import { Profile } from "../models/profile.model.js";
 
 
 import bcrypt from "bcryptjs";
+import { isValidObjectId } from "mongoose";
 
 export const register = async (req, res) => {
   try {
@@ -76,4 +77,16 @@ export const profile = async (req,res)=>{
         console.error("Error creating profile:", error);
         return res.status(500).json({ error: "Failed to create profile." });
       }
+}
+
+export const getProfile = async (req,res)=>{
+  const userId = req.user?._id;
+
+  if(!isValidObjectId(userId)){
+    return new Error("Invalid User Id")
+  }
+  const details = await Profile.findOne({userId}).populate("userId")
+  console.log(details);
+  
+  return res.status(200).json(details)
 }

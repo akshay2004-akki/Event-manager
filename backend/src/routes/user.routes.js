@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { profile, register } from "../controllers/user.controller.js";
+import { getProfile, profile, register } from "../controllers/user.controller.js";
 import passport from "passport";
 import { isAuthenticated } from "../middlewares/auth.middleware.js";
 
@@ -28,6 +28,7 @@ router.post("/logout", (req, res) => {
   });
 
   router.post("/profile", isAuthenticated, profile)
+  router.get("/getDetails", isAuthenticated, getProfile)
 
 
 export default router;
