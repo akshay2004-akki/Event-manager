@@ -1,14 +1,6 @@
 import { User } from "../models/user.model.js";
 
-<<<<<<< HEAD
-export const register = async(req,res)=>{
-    
-    const {username, fullName, email, password} = req.body;
-    console.log(username,fullName,email,password);
-    
-    if(!username || !fullName || !email || !password){
-        return res.status(400).json({error:"Fill the required fields"});
-=======
+
 export const register = async (req, res) => {
     console.log(req.body);
     if (typeof req.body === "string") {
@@ -25,7 +17,6 @@ export const register = async (req, res) => {
 
     if (!username || !fullName || !email || !password) {
         return res.status(400).json({ error: "Fill the required fields" });
->>>>>>> 6f7e6d3e865394940829b99291f0c671ca700a17
     }
 
     const existedUser = await User.findOne({ email });
