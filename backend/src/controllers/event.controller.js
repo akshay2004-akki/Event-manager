@@ -62,19 +62,5 @@ export const createEvent = async (req, res) => {
 };
 
 export const getEvent = async (req, res) => {
-    const {
-        eventName,
-        dateTime,
-        location,
-        category,
-        coordinatorName,
-        coordinatorContact,
-        coordinatorEmail,
-        club,
-        department,
-        facultyName,
-        facultyEmail,
-        description,
-        eventImage,
-      } = req.body;
+    
 };
