@@ -8,7 +8,7 @@ import { isValidObjectId } from "mongoose";
 export const register = async (req, res) => {
   try {
     const { username, fullName, email, password } = req.body;
-    console.log(username, fullName, email, password);
+    // console.log(username, fullName, email, password);
 
     // Check for missing fields
     if (!username || !fullName || !email || !password) {
@@ -27,15 +27,13 @@ export const register = async (req, res) => {
       return res.status(400).json({ error: "Username already taken." });
     }
 
-    // Hash the password before saving
-    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create the new user
     const newUser = await User.create({
       username,
       fullName,
       email,
-      password: hashedPassword,
+      password
     });
 
     return res.status(201).json({
@@ -90,3 +88,4 @@ export const getProfile = async (req,res)=>{
   
   return res.status(200).json(details)
 }
+

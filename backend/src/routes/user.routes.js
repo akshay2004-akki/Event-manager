@@ -25,10 +25,10 @@ router.post("/logout", (req, res) => {
       req.session.destroy();
       res.json({ message: "Logout successful" });
     });
-  });
+});
 
-  router.post("/profile", isAuthenticated, profile)
-  router.get("/getDetails", isAuthenticated, getProfile)
+router.post("/profile", isAuthenticated, profile)
+router.get("/getDetails", isAuthenticated, getProfile)
 
 
 export default router;

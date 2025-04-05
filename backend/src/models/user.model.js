@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema(
       trim: true,
       index: true, // Faster lookups
     },
+    isAuthorized :{
+      type : Boolean,
+      default : false
+    },
 
     password: {
       type: String,
