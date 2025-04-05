@@ -23,23 +23,23 @@ const eventSchema = new mongoose.Schema(
       required: true,
     },
     coordinatorName: {
-        type: String,
-        required: true,
-        trim: true,
-      },
-      coordinatorContact: {
-        type: String,
-        required: true,
-        match: [/^\d{10}$/, "Please enter a valid 10-digit phone number"],
-      },
+      type: String,
+      required: true,
+      trim: true,
+    },
+    coordinatorContact: {
+      type: String,
+      required: true,
+      match: [/^\d{10}$/, "Please enter a valid 10-digit phone number"],
+    },
 
-      coordinatorEmail: {
-        type: String,
-        required: true,
-        lowercase: true,
-        match: [/.+@.+\..+/, "Please enter a valid email address"],
-      },
-    
+    coordinatorEmail: {
+      type: String,
+      required: true,
+      lowercase: true,
+      match: [/.+@.+\..+/, "Please enter a valid email address"],
+    },
+
     club: {
       type: String,
       required: true,
@@ -53,17 +53,17 @@ const eventSchema = new mongoose.Schema(
     },
 
     facultyName: {
-        type: String,
-        required: true,
-        trim: true,
-      },
+      type: String,
+      required: true,
+      trim: true,
+    },
 
-      facultyEmail: {
-        type: String,
-        required: true,
-        lowercase: true,
-        match: [/.+@.+\..+/, "Please enter a valid email address"],
-      },
+    facultyEmail: {
+      type: String,
+      required: true,
+      lowercase: true,
+      match: [/.+@.+\..+/, "Please enter a valid email address"],
+    },
 
     description: {
       type: String,
@@ -73,12 +73,9 @@ const eventSchema = new mongoose.Schema(
     eventImage: {
       type: String, // Assuming URL or file path to image
     },
-    
   },
 
   { timestamps: true }
-  
 );
 
-const Event = mongoose.model("Event", eventSchema);
-export default Event;
+export const Event = mongoose.model("Event", eventSchema);

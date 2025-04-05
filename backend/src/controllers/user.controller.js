@@ -2,7 +2,7 @@ import { User } from "../models/user.model.js";
 import { Profile } from "../models/profile.model.js";
 
 
-import bcrypt from "bcryptjs";
+// import bcrypt from "bcryptjs";
 import { isValidObjectId } from "mongoose";
 
 export const register = async (req, res) => {
@@ -89,3 +89,23 @@ export const getProfile = async (req,res)=>{
   return res.status(200).json(details)
 }
 
+export const updateProfile = async (req,res)=>{
+  try {
+    const userId = req.user?._id;
+
+    const { department, phoneNumber, section, collegeName, semester } = req.body;
+
+    if(isValidObjectId(userId)){
+      return new Error("Invalid User Id")
+    }
+
+    if (!department || !phoneNumber || !section || !collegeName || !semester) {
+      return res.status(400).json({ error: "All fields are required." });
+    }
+
+    const updatedUser = await Profile.findByIdAndUpdate(userId, {department,phoneNumber, section, collegeName, semester}, {new:true})
+
+  } catch (error) {
+    
+  }
+}
