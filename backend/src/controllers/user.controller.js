@@ -89,6 +89,7 @@ export const getProfile = async (req,res)=>{
   return res.status(200).json(details)
 }
 
+<<<<<<< HEAD
 export const updateProfile = async (req,res)=>{
   try {
     const userId = req.user?._id;
@@ -109,3 +110,6 @@ export const updateProfile = async (req,res)=>{
     
   }
 }
+=======
+
+>>>>>>> 9e7879550317ea2cdbd4eacff4a22b2720d00d54

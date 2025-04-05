@@ -79,3 +79,7 @@ const eventSchema = new mongoose.Schema(
 );
 
 export const Event = mongoose.model("Event", eventSchema);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9e7879550317ea2cdbd4eacff4a22b2720d00d54
