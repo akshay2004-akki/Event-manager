@@ -71,7 +71,9 @@ passport.deserializeUser(async (id, done) => {
 });
 
 import userRoutes from './routes/user.routes.js'
+import eventRouter from './routes/event.routes.js'
 
 app.use("/api/users", userRoutes)
+app.use("/api/event" , eventRouter)
 
 export default app;
