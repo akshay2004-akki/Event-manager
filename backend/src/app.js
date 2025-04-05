@@ -14,17 +14,25 @@ const app = express()
 app.use(express.json({limit:"20kb"}))
 app.use(express.urlencoded({extended:true, limit:"20kb"}))
 app.use(express.static("public"))
-app.use(cors({credentials:true, origin:process.env.CORS_ORIGIN}))
+app.use(cors({credentials:true, origin:process.env.CORS_ORIGIN, methods:["GET", "POST", "PUT", "DELETE"]}))
 
 
 app.use(
-    session({
-      secret: process.env.SESSION_KEY, // Change this to a secure key
-      resave: false,
-      saveUninitialized: false,
-      store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }), // Store sessions in MongoDB
-      cookie: { secure: false, httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 90 }, // 1-hour session
-    })
+  session({
+    secret: process.env.SESSION_KEY,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI,
+      collectionName: "sessions",
+    }),
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 90, // 👈 3 months
+      httpOnly: true,
+      secure: false, // set true only if using HTTPS
+      sameSite: "lax",
+    },
+  })
 );
 
 app.use(passport.initialize()); 
@@ -68,6 +76,13 @@ passport.deserializeUser(async (id, done) => {
     done(err);
   }
 });
+
+
+app.use((req, res, next) => {
+  console.log("Session user:", req.user); // 👈 this should log on every request
+  next();
+});
+
 
 import userRoutes from './routes/user.routes.js'
 import eventRouter from './routes/event.routes.js'
