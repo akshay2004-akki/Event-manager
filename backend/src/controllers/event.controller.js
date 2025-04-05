@@ -61,4 +61,18 @@ export const createEvent = async (req, res) => {
   }
 };
 
+export const getEvent = async (req, res) => {
+   try {
+    const getAllEvents = await Event.find({});
+
+    if(!getAllEvents){
+      return new Error("No events Found");
+    }
+
+    return res.status(200).json({events : getAllEvents})
+
+   } catch (error) {
+    
+   } 
+};
 
