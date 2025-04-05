@@ -61,6 +61,4 @@ export const createEvent = async (req, res) => {
   }
 };
 
-export const getEvent = async (req, res) => {
-    
-};
+
