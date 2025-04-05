@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import {Event} from "../models/event.model.js";
-
-=======
-import { Event } from "../models/event.model.js";
 
 export const createEvent = async (req, res) => {
     try {
@@ -65,4 +61,3 @@ export const createEvent = async (req, res) => {
       return res.status(500).json({ error: "Failed to create event." });
     }
   };
->>>>>>> 9e7879550317ea2cdbd4eacff4a22b2720d00d54
