@@ -95,7 +95,7 @@ export const updateProfile = async (req,res)=>{
 
     const { department, phoneNumber, section, collegeName, semester } = req.body;
 
-    if(isValidObjectId(userId)){
+    if(!isValidObjectId(userId)){
       return new Error("Invalid User Id")
     }
 

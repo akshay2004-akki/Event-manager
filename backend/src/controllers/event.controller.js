@@ -1,3 +1,4 @@
+import { isValidObjectId } from "mongoose";
 import { Event } from "../models/event.model.js";
 
 export const createEvent = async (req, res) => {
@@ -75,4 +76,17 @@ export const getEvent = async (req, res) => {
     
    } 
 };
+
+export const getEventById = async(req,res)=>{
+  const {eventid} = req.params;
+
+  if(!isValidObjectId(eventid)){
+    return new Error("Invalid event Id");
+  }
+
+  const event = await Event.find({_id:eventid})
+
+  return res.status(200).json(event)
+
+}
 
