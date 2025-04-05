@@ -18,7 +18,7 @@ export const createEvent = async (req, res) => {
         eventImage,
       } = req.body;
   
-      // Basic validation
+     
       if (
         !eventName ||
         !dateTime ||
