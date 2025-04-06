@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 import { Message } from '../models/chat.models.js';
 
-let io;
+let io; 
 
 export const initSocket = (server) => {
   io = new Server(server, {

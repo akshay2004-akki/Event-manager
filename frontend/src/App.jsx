@@ -12,13 +12,17 @@ import CreateEvents from "./Components/CreateEvents.jsx"
 import EventDetails from "./Components/EventDetails.jsx"
 import Login from "./Components/Login.jsx"
 import Chat from "./Components/Chant.jsx"
+import SignUp from "./Components/SignUp.jsx"
+import { useState } from "react"
 
 function App() {
+
+  const [loggedIn, setLoggedIn] = useState(false)
 
   return (
     <>
       <Router>
-        <Navbar/>
+        <Navbar loggedIn={loggedIn}/>
         <Routes>
           <Route path="/" element={
             <>
@@ -32,8 +36,9 @@ function App() {
           <Route path="/eventRegistration" element={<EventsPage/>} />
           <Route path="/events" element={<CreateEvents/>} />
           <Route path="/events/:eventId" element = {<EventDetails/>} />
-          <Route path="/login" element = {<Login/>} />
-          {/* <Route path="/chat" element={<Chat senderId="67f19d0731ab4bf3b7a34411" receiverId="67f275d5d84894ddd2c0b3a1" />} /> */}
+          <Route path="/login" element = {<Login/>} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          <Route path="/register" element={<SignUp/>} />
+          <Route path="/chat" element={<Chat senderId="67f275d5d84894ddd2c0b3a1" receiverId="67f19d0731ab4bf3b7a34411" />} />
         </Routes>
         <Footer/>
       </Router>

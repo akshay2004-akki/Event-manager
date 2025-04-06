@@ -1,7 +1,39 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
 import background from '../assets/registerEvent.webp'
 
-const Login = () => {
+import axios from 'axios'
+import { useNavigate } from "react-router-dom";
+
+
+
+const Login = ({loggedIn, setLoggedIn}) => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("")
+
+  const route = useNavigate();
+
+  const handleLogin = async (e)=>{
+    e.preventDefault();
+    
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/login`, {email, password}, {withCredentials:true})
+      // alert(response.data.message);
+
+      if(response.data.statusText=="OK"){
+        setLoggedIn(true)
+      }
+      
+      route("/");
+    } catch (error) {
+      console.log(error.message);
+
+      setLoggedIn(false);
+      
+    }
+  }
+
   return (
     <div className="flex translate-y-[60px] min-h-screen items-center justify-center bg-gradient-to-r from-purple-500 to-blue-400 p-4">
       <div className="flex w-full max-w-4xl flex-col md:flex-row rounded-3xl bg-white shadow-lg overflow-hidden">
@@ -18,13 +50,14 @@ const Login = () => {
         <div className="w-full md:w-1/2 p-8">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Nice to see you again</h2>
           
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleLogin}>
             <div>
-              <label className="block text-sm font-medium text-gray-600">Email or phone number</label>
+              <label className="block text-sm font-medium text-gray-600">Email</label>
               <input
                 type="text"
                 className="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter your email or phone"
+                onChange={(e)=>setEmail(e.target.value)}
               />
             </div>
 
@@ -34,6 +67,7 @@ const Login = () => {
                 type="password"
                 className="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter password"
+                onChange={(e)=>setPassword(e.target.value)}
               />
             </div>
 

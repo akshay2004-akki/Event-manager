@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate  } from "react-router-dom";
 import logo from "../assets/logo.jpg";
 
-function Navbar() {
+function Navbar({loggedIn}) {
   const [toggle, setToggle] = useState(false);
 
   window.onscroll = ()=>{
@@ -15,7 +15,14 @@ function Navbar() {
   const handleLoginRoute = ()=>{
     route("/login")
   }
+  const route2 = useNavigate()
+  const handleSignUpRoute = ()=>{
+    route2("/register")
+  }
 
+  const handleProfile = async(e)=>{
+    
+  }
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
       <div className="container mx-auto flex items-center justify-between p-4">
@@ -34,14 +41,16 @@ function Navbar() {
         </div>
 
         {/* Right Section: Buttons */}
-        <div className="hidden md:flex gap-4">
-          <button onClick={handleLoginRoute} className="px-4 py-2 border-2 border-black rounded-md hover:bg-gray-100">
-            Login
-          </button>
-          <button className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800">
-            Sign Up
-          </button>
-        </div>
+        {
+          loggedIn ? (<div className={`hidden md:flex gap-4 ${loggedIn?"hidden":"block"}`}>
+            <button onClick={handleLoginRoute} className="px-4 py-2 border-2 border-black rounded-md hover:bg-gray-100">
+              Login
+            </button>
+            <button className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800" onClick={handleSignUpRoute}>
+              Sign Up
+            </button>
+          </div>) : (<button onClick={handleProfile} className="text-left text-red-400 rounded-full hover:text-red-800">Profile</button>)
+        }
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden">
