@@ -11,6 +11,7 @@ import EventsPage from "./Components/EventsPage.jsx"
 import CreateEvents from "./Components/CreateEvents.jsx"
 import EventDetails from "./Components/EventDetails.jsx"
 import Login from "./Components/Login.jsx"
+import Chat from "./Components/Chant.jsx"
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/events" element={<CreateEvents/>} />
           <Route path="/events/:eventId" element = {<EventDetails/>} />
           <Route path="/login" element = {<Login/>} />
+          {/* <Route path="/chat" element={<Chat senderId="67f19d0731ab4bf3b7a34411" receiverId="67f275d5d84894ddd2c0b3a1" />} /> */}
         </Routes>
         <Footer/>
       </Router>

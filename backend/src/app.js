@@ -83,11 +83,12 @@ app.use((req, res, next) => {
   next();
 });
 
-
+ 
 import userRoutes from './routes/user.routes.js'
 import eventRouter from './routes/event.routes.js'
-
+import chatRouter from './routes/chat.routes.js'
 app.use("/api/users", userRoutes)
 app.use("/api/event" , eventRouter)
+app.use("/api/chat", chatRouter)
 
 export default app;
