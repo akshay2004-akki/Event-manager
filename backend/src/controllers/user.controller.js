@@ -4,6 +4,7 @@ import { Profile } from "../models/profile.model.js";
 
 // import bcrypt from "bcryptjs";
 import { isValidObjectId } from "mongoose";
+import bcrypt from "bcryptjs";
 
 export const register = async (req, res) => {
   try {
@@ -107,5 +108,33 @@ export const updateProfile = async (req,res)=>{
 
   } catch (error) {
     
+  }
+}
+
+export const changePassword = async (req,res)=>{
+  try {
+    const userId = req.user?._id
+    if(!isValidObjectId(userId)){
+      return res.status(404).json({error:"UserID not found or is invalid"})
+    }
+    const {currentPassword, newPassword} = req.body
+    if(!currentPassword || !newPassword){
+      return res.status(400).json({error : "all fields are required"})
+    }
+
+    const user = await User.findById(userId);
+    const isMatch = await user.comparePassword(currentPassword, user.password);
+
+    if(!isMatch){
+      return res.status(409).json({error : "Your current password is not valid"})
+    }
+
+    user.password=newPassword;
+    await user.save({validateBeforeSave:false});
+
+    return res.status(200).json({message : "Password change successfully"})
+
+  } catch (error) {
+    return res.status(500).json({error : error.message});
   }
 }

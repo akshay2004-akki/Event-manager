@@ -1,8 +1,8 @@
 import { isValidObjectId } from "mongoose";
 import { Event } from "../models/event.model.js";
 import { RegisteredEvent } from "../models/registeredEvent.model.js";
-import fs from 'fs';
 import { appendToEventSheet } from "../utils/googlesheets.js";
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 export const createEvent = async (req, res) => {
   try {
@@ -19,7 +19,6 @@ export const createEvent = async (req, res) => {
       facultyName,
       facultyEmail,
       description,
-      eventImage,
     } = req.body;
 
     if (
@@ -39,6 +38,17 @@ export const createEvent = async (req, res) => {
       return res.status(400).json({ error: "All fields are required." });
     }
 
+    if (!req.file) {
+      return res.status(400).json({ error: "Event image is required." });
+    }
+
+    // Upload to Cloudinary
+    const result = await uploadOnCloudinary(req.file.buffer, req.file.originalname);
+
+    if (!result || !result.secure_url) {
+      return res.status(500).json({ error: "Image upload failed." });
+    }
+
     const newEvent = await Event.create({
       eventName,
       dateTime,
@@ -52,7 +62,7 @@ export const createEvent = async (req, res) => {
       facultyName,
       facultyEmail,
       description,
-      eventImage,
+      eventImage : result.secure_url,
     });
 
     return res.status(201).json({
