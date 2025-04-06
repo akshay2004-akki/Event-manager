@@ -198,3 +198,5 @@ export const getRegisteredEvent = async (req, res) => {
   }
 };
 
+
+
