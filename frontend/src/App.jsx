@@ -14,6 +14,7 @@ import Login from "./Components/Login.jsx"
 import Chat from "./Components/Chant.jsx"
 import SignUp from "./Components/SignUp.jsx"
 import { useState } from "react"
+import Profile from "./Components/Profile.jsx"
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/events/:eventId" element = {<EventDetails/>} />
           <Route path="/login" element = {<Login/>} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
           <Route path="/register" element={<SignUp/>} />
+          <Route path="/profile" element={<Profile/>} />
           <Route path="/chat" element={<Chat senderId="67f275d5d84894ddd2c0b3a1" receiverId="67f19d0731ab4bf3b7a34411" />} />
         </Routes>
         <Footer/>

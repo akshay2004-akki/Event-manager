@@ -19,9 +19,9 @@ function Navbar({loggedIn}) {
   const handleSignUpRoute = ()=>{
     route2("/register")
   }
-
-  const handleProfile = async(e)=>{
-    
+  const profileRoute = useNavigate()
+  const handleProfile = async()=>{
+    profileRoute("/profile")
   }
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">

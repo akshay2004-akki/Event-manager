@@ -8,6 +8,6 @@ router.post('/createEvent', upload.single("eventImage") ,createEvent);
 router.get('/getEvent' , getEvent)
 router.get("/:eventid", getEventById)
 router.post("/registerEvent/:eventid", isAuthenticated, registerForEvent)
-router.post("/get-registered-events", getRegisteredEvent)
+router.post("/get-registered-events", isAuthenticated ,getRegisteredEvent)
 
 export default router
