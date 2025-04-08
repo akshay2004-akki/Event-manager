@@ -14,7 +14,7 @@ const app = express()
 app.use(express.json({limit:"20kb"}))
 app.use(express.urlencoded({extended:true, limit:"20kb"}))
 app.use(express.static("public"))
-app.use(cors({credentials:true, origin:process.env.CORS_ORIGIN, methods:["GET", "POST", "PUT", "DELETE"]}))
+app.use(cors({credentials:true, origin:[process.env.CORS_ORIGIN, "https://event-manager-oysn.onrender.com"], methods:["GET", "POST", "PUT", "DELETE"]}))
 
 
 app.use(
@@ -86,9 +86,9 @@ app.use((req, res, next) => {
  
 import userRoutes from './routes/user.routes.js'
 import eventRouter from './routes/event.routes.js'
-import chatRouter from './routes/chat.routes.js'
+// import chatRouter from './routes/chat.routes.js'
 app.use("/api/users", userRoutes)
 app.use("/api/event" , eventRouter)
-app.use("/api/chat", chatRouter)
+// app.use("/api/chat", chatRouter)
 
 export default app;

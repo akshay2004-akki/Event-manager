@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import EventDetails from "./EventDetails";
 
-function ProfileSection() {
+function ProfileSection({setLoggedIn}) {
   const [profileData, setProfileData] = useState(null);
   const [registeredEvents, setRegisteredEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -138,14 +138,35 @@ function ProfileSection() {
     },
   ];
 
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/logout`,
+        {},
+        { withCredentials: true }
+      );
+      setLoggedIn(false)
+      window.location.href = "/login"; // or redirect however your app handles login
+    } catch (error) {
+      console.error("Logout failed:", error.message);
+    }
+  };
+  
+
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-8 pt-24">
   {/* Profile Header */}
   <div className="bg-indigo-600 text-white rounded-t-xl p-6 md:p-10 shadow-lg relative overflow-hidden">
-    <div className="absolute top-4 right-4 z-10">
+    <div className="absolute top-4 right-4 z- flex gap-3">
       <button className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-medium py-2 px-4 rounded-lg text-xs inline-flex items-center transition duration-200 shadow-sm hover:shadow-md">
         <Pencil size={12} className="mr-1.5" /> Edit Profile
       </button>
+      <button
+      onClick={handleLogout}
+      className="bg-red-500 hover:bg-red-700 backdrop-blur-sm text-white font-medium py-2 px-4 rounded-lg text-xs inline-flex items-center transition duration-200 shadow-sm hover:shadow-md"
+    >
+      Logout
+    </button>
     </div>
 
     <div className="flex flex-col sm:flex-row items-center sm:items-start sm:space-x-6">

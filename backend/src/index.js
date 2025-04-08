@@ -1,9 +1,6 @@
 import { connectDB } from "./db/index.js";
 import app from "./app.js";
 import http from 'http'
-import { Server } from "socket.io";
-import { initSocket } from "./utils/socket.js";
-
 const server = http.createServer(app)
 
 
@@ -14,10 +11,10 @@ connectDB()
               });
           
               // Socket.IO logic
-              initSocket(server);
+              // initSocket(server);
           
               // Start server
-              server.listen(process.env.PORT, () => {
+              app.listen(process.env.PORT, () => {
                 console.log(`Server listening on port ${process.env.PORT}`);
               });
         })

@@ -92,44 +92,45 @@ const EventsPage = () => {
 
       {/* Modal */}
       {isModalOpen && selectedEvent && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
-          role="dialog"
-          aria-modal="true"
+  <div
+    className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm min-h-screen"
+    role="dialog"
+    aria-modal="true"
+    onClick={() => setIsModalOpen(false)}
+  >
+    <div
+      className="relative w-full mx-4 sm:mx-6 md:mx-8 max-w-5xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-xl p-4 sm:p-6 md:p-8"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Close Button */}
+      <div className="flex justify-end">
+        <button
+          className="text-gray-500 hover:text-red-600 text-2xl"
           onClick={() => setIsModalOpen(false)}
+          aria-label="Close"
         >
-          <div
-            className="relative w-full mx-4 sm:mx-6 md:mx-8 max-w-5xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-xl p-4 sm:p-6 md:p-8"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close Button */}
-            <div className="flex justify-end">
-              <button
-                className="text-gray-500 hover:text-red-600 text-2xl"
-                onClick={() => setIsModalOpen(false)}
-                aria-label="Close"
-              >
-                X
-              </button>
-            </div>
+          X
+        </button>
+      </div>
 
-            {/* Modal Content */}
-            <h2 className="text-xl sm:text-2xl font-bold text-indigo-700 mb-4">
-              Event Details
-            </h2>
-            <EventDetails event={selectedEvent} />
+      {/* Modal Content */}
+      <h2 className="text-xl sm:text-2xl font-bold text-indigo-700 mb-4">
+        Event Details
+      </h2>
+      <EventDetails event={selectedEvent} />
 
-            <div className="mt-6 flex justify-end">
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="bg-indigo-600 text-white px-4 sm:px-5 py-2 rounded-md font-medium hover:bg-indigo-700 transition"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <div className="mt-6 flex justify-end">
+        <button
+          onClick={() => setIsModalOpen(false)}
+          className="bg-indigo-600 text-white px-4 sm:px-5 py-2 rounded-md font-medium hover:bg-indigo-700 transition"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };

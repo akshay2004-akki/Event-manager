@@ -42,7 +42,7 @@ function Navbar({loggedIn}) {
 
         {/* Right Section: Buttons */}
         {
-          loggedIn ? (<div className={`hidden md:flex gap-4 ${loggedIn?"hidden":"block"}`}>
+          !loggedIn ? (<div className={`hidden md:flex gap-4 ${loggedIn?"hidden":"block"}`}>
             <button onClick={handleLoginRoute} className="px-4 py-2 border-2 border-black rounded-md hover:bg-gray-100">
               Login
             </button>
