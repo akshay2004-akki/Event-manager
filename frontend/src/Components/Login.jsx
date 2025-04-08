@@ -23,7 +23,7 @@ const Login = ({loggedIn, setLoggedIn}) => {
       console.log(response);
       
 
-      if(response.statusText=="OK"){
+      if(response.status==200){
         setLoggedIn(true)
       }
       
