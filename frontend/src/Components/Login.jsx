@@ -20,6 +20,7 @@ const Login = ({loggedIn, setLoggedIn}) => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/login`, {email, password}, {withCredentials:true})
       // alert(response.data.message);
+      console.log(response);
       
 
       if(response.statusText=="OK"){
