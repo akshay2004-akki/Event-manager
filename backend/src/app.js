@@ -81,6 +81,12 @@ app.use((req, res, next) => {
   next()
 })
 
+app.use((req,res,next)=>{
+  console.log("session user id : ", req.session.passport.user);
+  next();
+  
+})
+
 // Routes
 import userRoutes from './routes/user.routes.js'
 import eventRouter from './routes/event.routes.js'
