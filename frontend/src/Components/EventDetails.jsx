@@ -16,7 +16,7 @@ const EventDetails = ({ event }) => {
         <img
           src={event.eventImage}
           alt="Event Cover"
-          className="w-full h-full object-contain"
+          className="w-full h-full object-cover"
         />
         
       </div>

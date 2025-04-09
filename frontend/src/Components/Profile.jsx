@@ -104,7 +104,6 @@ function ProfileSection({setLoggedIn}) {
     section,
     semester,
     userId,
-    profilePic,
   } = profileData;
 
   const academicDetails = [
@@ -171,11 +170,9 @@ function ProfileSection({setLoggedIn}) {
 
     <div className="flex flex-col sm:flex-row items-center sm:items-start sm:space-x-6">
       <div className="relative mb-4 sm:mb-0 flex-shrink-0">
-        <img
-          className="w-28 h-28 sm:w-32 sm:h-32 rounded-full border-4 border-indigo-300 shadow-lg object-cover"
-          src={profilePic || "https://placehold.co/144x144/E0E7FF/4338CA?text=User"}
-          alt="User Profile"
-        />
+        <p className="w-28 h-28 sm:w-32 sm:h-32 rounded-full flex items-center justify-center border-4 bg-indigo-100 border-indigo-300 shadow-lg object-cover text-5xl text-black">
+            {userId.fullName.slice(0,2)}
+        </p>
         <span className="absolute bottom-1 right-1 block h-4 w-4 sm:h-5 sm:w-5 rounded-full bg-green-400 border-2 border-white ring-2 ring-green-300"></span>
       </div>
       <div className="text-center sm:text-left flex-1">

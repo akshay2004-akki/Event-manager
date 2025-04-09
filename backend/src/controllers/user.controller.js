@@ -79,6 +79,8 @@ export const profile = async (req,res)=>{
 }
 
 export const getProfile = async (req,res)=>{
+  console.log("session",req.session.passport.user);
+  
   const userId = req.user?._id;
 
   if(!isValidObjectId(userId)){
