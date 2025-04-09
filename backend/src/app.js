@@ -82,7 +82,7 @@ app.use((req, res, next) => {
 })
 
 app.use((req,res,next)=>{
-  console.log("session user id : ", req.session.passport.user);
+  console.log("session user id : ", req.session);
   next();
   
 })
