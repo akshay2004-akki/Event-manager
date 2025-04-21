@@ -20,7 +20,7 @@ app.use(express.static("public"))
 app.use(cors({
   origin: process.env.CORS_ORIGIN, // your frontend dev server
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE"]
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"]
 }))
 
 // ✅ Session middleware for localhost
@@ -35,16 +35,16 @@ app.use(
     }),
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 90, // 3 months
-      // httpOnly: true,
-      secure: true, // ✅ false for localhost (no HTTPS)
-      sameSite: "none", // ✅ lax is good for local dev
+      httpOnly: true,
+      secure: false, // ✅ false for localhost (no HTTPS)
+      sameSite: "lax", // ✅ lax is good for local dev
     },
   })
 )
 
 // ✅ Passport Setup
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(passport.initialize());
+app.use(passport.session());
 
 passport.use(
   new LocalStrategy({ usernameField: "email", passwordField: "password" },
@@ -76,16 +76,16 @@ passport.deserializeUser(async (id, done) => {
 })
 
 // ✅ Debug: Check session on every request
-app.use((req, res, next) => {
-  console.log("🔍 Session user:", req.user)
-  next()
-})
+// app.use((req, res, next) => {
+//   console.log("🔍 Session user:", req.user)
+//   next()
+// })
 
-app.use((req,res,next)=>{
-  console.log("session user id : ", req.session);
-  next();
+// app.use((req,res,next)=>{
+//   console.log("session user id : ", req.session);
+//   next();
   
-})
+// })
 
 // Routes
 import userRoutes from './routes/user.routes.js'

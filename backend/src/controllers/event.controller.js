@@ -184,11 +184,11 @@ export const getRegisteredEvent = async (req, res) => {
     }
 
     const registeredEvents = await RegisteredEvent.find({ userRegistered: userId }).populate("eventId");
-    console.log(registeredEvents);
+    console.log("events",registeredEvents);
     
-    if (!registeredEvents || registeredEvents.length === 0) {
-      return res.status(400).json({ error: "User is not registered for any event" });
-    }
+    // if (!registeredEvents || registeredEvents.length === 0) {
+    //   return res.status(400).json({ error: "User is not registered for any event" });
+    // }
 
 
     return res.status(200).json(registeredEvents);

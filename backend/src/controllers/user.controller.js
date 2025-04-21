@@ -56,9 +56,12 @@ export const register = async (req, res) => {
 export const profile = async (req,res)=>{
     try {
         const userId = req.user?._id; // Get user ID from session (Passport)
-        const { department, phoneNumber, section, collegeName, semester } = req.body;
+        const { department, phoneNumber, section, collegeName, semester, rollNumber, bio } = req.body;
+
+        console.log(department, phoneNumber, section, collegeName, semester, rollNumber, bio );
+        
     
-        if (!userId || !department || !phoneNumber || !section || !collegeName || !semester) {
+        if (!userId || !department || !phoneNumber || !section || !collegeName || !semester || !rollNumber) {
           return res.status(400).json({ error: "All fields are required." });
         }
     
@@ -69,6 +72,8 @@ export const profile = async (req,res)=>{
           section,
           collegeName,
           semester,
+          rollNumber,
+          bio
         });
     
         return res.status(201).json({ message: "Profile created successfully", profile: newProfile });
@@ -79,37 +84,46 @@ export const profile = async (req,res)=>{
 }
 
 export const getProfile = async (req,res)=>{
-  console.log("session",req.session.passport.user);
+  console.log("session",req.session);
   
   const userId = req.user?._id;
+  console.log("userid",userId);
+  
 
   if(!isValidObjectId(userId)){
     return new Error("Invalid User Id")
   }
-  const details = await Profile.findOne({userId}).populate("userId")
+  const details = await Profile.findOne({userId})?.populate("userId")
   console.log(details);
+
+  if(!details){
+    const details2 = await User.findById(userId)
+    console.log("details2", details2);
+    
+    return res.status(200).json(details2)
+  }
   
   return res.status(200).json(details)
 }
 
-export const updateProfile = async (req,res)=>{
+export const updateProfile = async (req,res)=>{ 
   try {
     const userId = req.user?._id;
 
-    const { department, phoneNumber, section, collegeName, semester } = req.body;
+    const { department, phoneNumber, section, semester, rollNumber, bio } = req.body;
 
     if(!isValidObjectId(userId)){
       return new Error("Invalid User Id")
     }
 
-    if (!department || !phoneNumber || !section || !collegeName || !semester) {
+    if (!department || !phoneNumber || !section || !semester) {
       return res.status(400).json({ error: "All fields are required." });
     }
 
-    const updatedUser = await Profile.findByIdAndUpdate(userId, {department,phoneNumber, section, collegeName, semester}, {new:true})
-
+    const updatedUser = await Profile.findOneAndUpdate({userId}, {department,phoneNumber, section, semester, rollNumber, bio}, {new:true})
+    return res.status(200).json({updatedUser})
   } catch (error) {
-    
+    console.log(error.message);
   }
 }
 

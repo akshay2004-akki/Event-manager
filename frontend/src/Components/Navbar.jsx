@@ -5,6 +5,8 @@ import logo from "../assets/logo.jpg";
 function Navbar({loggedIn}) {
   const [toggle, setToggle] = useState(false);
 
+  
+
   window.onscroll = ()=>{
     setToggle(false);
   }
@@ -35,7 +37,7 @@ function Navbar({loggedIn}) {
           <div className="hidden md:flex md:gap-6 ml-6 text-gray-800 font-medium">
             <Link onClick={handlLinkToggle} to="/" className="hover:text-amber-500">Home</Link>
             <Link onClick={handlLinkToggle} to="/events" className="hover:text-amber-500">Events</Link>
-            <Link onClick={handlLinkToggle} to="/eventRegistration" className="hover:text-amber-500">Event Registration</Link>
+            <Link onClick={handlLinkToggle} to="/eventRegistration" className={`hover:text-amber-500`}>Event Registration</Link>
             <Link onClick={handlLinkToggle} to="/support" className="hover:text-amber-500">Chat Support</Link>
           </div>
         </div>

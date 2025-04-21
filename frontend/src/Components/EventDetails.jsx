@@ -1,13 +1,52 @@
-import React from "react";
+import axios from "axios";
+import React,{useEffect, useState} from "react";
 
 const EventDetails = ({ event }) => {
   console.log("inside component",event);
+
+  const [userData, setUserData] = useState(null)
   
   const formattedDate = new Date(event?.dateTime).toLocaleDateString();
   const formattedTime = new Date(event?.dateTime).toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
   });
+
+  useEffect(()=>{
+    const fetchData = async ()=>{
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/getDetails`, {withCredentials:true});
+        setUserData(res.data)
+      } catch (error) {
+        console.log(error.message);
+        
+      }
+    }
+    fetchData();
+  },[])
+
+  const handleRegister = async (eventId, eventName)=>{
+    console.log(userData);
+    
+    try {
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/event/registerEvent/${eventId}`, {
+        name : userData.userId.fullName,
+        email : userData.userId.email,
+        department : userData.department,
+        phoneNumber : userData.phoneNumber,
+        section : userData.section,
+        collegeName : userData.collegeName,
+        semester : userData.semester,
+        rollNumber : userData.rollNumber,
+        eventName : eventName,
+      },{withCredentials:true})
+      console.log(res.data);
+      alert(`${userData.userId.fullName} registerdd for the event ${eventName}`)
+    } catch (error) {
+      console.log(error.message);
+      
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -67,7 +106,7 @@ const EventDetails = ({ event }) => {
 
         {/* Buttons */}
         <div className="mt-8 flex justify-center gap-4">
-          <button className="px-6 py-2 bg-white text-black border font-medium rounded-lg hover:bg-blue-700 hover:text-white transition">
+          <button onClick={()=>handleRegister(event?._id, event.eventName)} className="px-6 py-2 bg-white text-black border font-medium rounded-lg hover:bg-blue-700 hover:text-white transition">
             Register Now
           </button>
           <button className="px-6 py-2 border bg-black text-white font-medium rounded-lg hover:bg-gray-100 hover:text-black transition">

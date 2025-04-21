@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -14,12 +15,13 @@ function SignUp() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const route = useNavigate()
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
         const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/register`, formData, {withCredentials:true})
         console.log(response.data);
-        
     } catch (error) {
         console.log(error.message)
     }

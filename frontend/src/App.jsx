@@ -15,6 +15,8 @@ import Login from "./Components/Login.jsx"
 import SignUp from "./Components/SignUp.jsx"
 import { useState } from "react"
 import Profile from "./Components/Profile.jsx"
+import EditProfile from "./Components/EditProfile.jsx"
+import CompleteProfile from "./Components/CompleteProfile.jsx"
 
 function App() {
 
@@ -41,6 +43,8 @@ function App() {
           <Route path="/register" element={<SignUp/>} />
           <Route path="/profile" element={<Profile setLoggedIn={setLoggedIn}/>} />
           {/* <Route path="/chat" element={<Chat senderId="67f275d5d84894ddd2c0b3a1" receiverId="67f19d0731ab4bf3b7a34411" />} /> */}
+          <Route path="/editProfile" element={<EditProfile/>} />
+          <Route path="/cmptProf" element={<CompleteProfile/>}/>
         </Routes>
         <Footer/>
       </Router>

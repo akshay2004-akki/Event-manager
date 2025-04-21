@@ -25,6 +25,13 @@ const profileSchema = new Schema({
     semester : {
         type : Number,
         required  : true
+    },
+    rollNumber : {
+        type : String,
+        required : true
+    },
+    bio : {
+        type : String
     }
 },{timestamps:true})
 
