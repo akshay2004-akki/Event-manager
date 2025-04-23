@@ -3,6 +3,17 @@ import { Event } from "../models/event.model.js";
 import { RegisteredEvent } from "../models/registeredEvent.model.js";
 import { appendToEventSheet } from "../utils/googlesheets.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import { Notification } from "../models/notification.model.js";
+import { User } from "../models/user.model.js";
+
+const notifyAllUsers = async (content) => {
+  const users = await User.find({});
+  const notifications = users.map((user) => ({
+    userId: user._id,
+    content,
+  }));
+  await Notification.insertMany(notifications);
+};
 
 export const createEvent = async (req, res) => {
   try {
@@ -35,6 +46,8 @@ export const createEvent = async (req, res) => {
       !facultyEmail ||
       !description
     ) {
+      console.log("fill the required fields");
+      
       return res.status(400).json({ error: "All fields are required." });
     }
 
@@ -65,6 +78,9 @@ export const createEvent = async (req, res) => {
       eventImage : result.secure_url,
     });
 
+
+    await notifyAllUsers(`🎉 New Event: ${eventName} is live!`);
+
     return res.status(201).json({
       message: "Event created successfully",
       event: newEvent,
@@ -77,7 +93,7 @@ export const createEvent = async (req, res) => {
 
 export const getEvent = async (req, res) => {
    try {
-    const getAllEvents = await Event.find({});
+    const getAllEvents = await Event.find({}).sort({dateTime : 1});
 
     if(!getAllEvents){
       return new Error("No events Found");

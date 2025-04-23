@@ -1,11 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate  } from "react-router-dom";
 import logo from "../assets/logo.jpg";
+import axios from "axios";
 
 function Navbar({loggedIn}) {
   const [toggle, setToggle] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
+  useEffect(()=>{
+    const fetchAdmin = async()=>{
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/getDetails`, {withCredentials:true});
   
+        setIsAdmin(res.data.userId.isAuthorized);
+      } catch (error) {
+        console.log(error.message);
+        
+      }
+    }
+    fetchAdmin();
+  },[loggedIn])
+
+  let isLoggedIn = useRef(null);
+
+  useEffect(()=>{
+    isLoggedIn.current = localStorage.getItem("isLoggedIn")
+  },[])
 
   window.onscroll = ()=>{
     setToggle(false);
@@ -36,7 +56,7 @@ function Navbar({loggedIn}) {
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex md:gap-6 ml-6 text-gray-800 font-medium">
             <Link onClick={handlLinkToggle} to="/" className="hover:text-amber-500">Home</Link>
-            <Link onClick={handlLinkToggle} to="/events" className="hover:text-amber-500">Events</Link>
+            <Link onClick={handlLinkToggle} to="/events" className={`hover:text-amber-500 ${isAdmin?"block":"hidden"}`}>Create Events</Link>
             <Link onClick={handlLinkToggle} to="/eventRegistration" className={`hover:text-amber-500`}>Event Registration</Link>
             <Link onClick={handlLinkToggle} to="/support" className="hover:text-amber-500">Chat Support</Link>
           </div>
@@ -44,14 +64,14 @@ function Navbar({loggedIn}) {
 
         {/* Right Section: Buttons */}
         {
-          !loggedIn ? (<div className={`hidden md:flex gap-4 ${loggedIn?"hidden":"block"}`}>
+          !isLoggedIn.current ? (<div className={`hidden md:flex gap-4 ${isLoggedIn.current?"hidden":"block"}`}>
             <button onClick={handleLoginRoute} className="px-4 py-2 border-2 border-black rounded-md hover:bg-gray-100">
               Login
             </button>
             <button className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800" onClick={handleSignUpRoute}>
               Sign Up
             </button>
-          </div>) : (<button onClick={handleProfile} className="text-left text-red-400 rounded-full hover:text-red-800">Profile</button>)
+          </div>) : (<button onClick={handleProfile} className="text-left rounded-b-full text-white p-3 bg-black rounded-full hover:text-red-800">Me</button>)
         }
 
         {/* Mobile Menu Toggle */}

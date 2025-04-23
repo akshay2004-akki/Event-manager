@@ -90,8 +90,10 @@ passport.deserializeUser(async (id, done) => {
 // Routes
 import userRoutes from './routes/user.routes.js'
 import eventRouter from './routes/event.routes.js'
+import notificationRouter from './routes/notification.routes.js'
 
 app.use("/api/users", userRoutes)
 app.use("/api/event", eventRouter)
+app.use("/api/notify", notificationRouter)
 
 export default app

@@ -27,7 +27,7 @@ const Login = ({loggedIn, setLoggedIn}) => {
         setLoggedIn(true)
       }
       
-      route("/");
+      route("/",{state:{showToast : true}});
     } catch (error) {
       console.log(error.message);
 

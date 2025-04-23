@@ -85,7 +85,7 @@ export const profile = async (req,res)=>{
 
 export const getProfile = async (req,res)=>{
   console.log("session",req.session);
-  
+
   const userId = req.user?._id;
   console.log("userid",userId);
   
@@ -151,6 +151,6 @@ export const changePassword = async (req,res)=>{
     return res.status(200).json({message : "Password change successfully"})
 
   } catch (error) {
-    return res.status(500).json({error : error.message});
+    return res.status(500).json({error : error.message}); 
   }
 }

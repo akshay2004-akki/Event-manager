@@ -5,7 +5,7 @@ import { upload } from "../middlewares/multer.middleware.js";
 import { verifyAdmin } from "../middlewares/admin.middleware.js";
 const router = Router();
 
-router.post('/createEvent', verifyAdmin ,upload.single("eventImage") ,createEvent);
+router.post('/createEvent',upload.single("eventImage") ,createEvent); 
 router.get('/getEvent' , getEvent)
 router.get("/:eventid", getEventById)
 router.post("/registerEvent/:eventid", isAuthenticated, registerForEvent)

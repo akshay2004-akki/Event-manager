@@ -152,6 +152,8 @@ function ProfileSection({ setLoggedIn }) {
         { withCredentials: true }
       );
       setLoggedIn(false);
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("isLoginToastShown");
       window.location.href = "/login";
     } catch (error) {
       console.error("Logout failed:", error.message);
@@ -274,7 +276,7 @@ function ProfileSection({ setLoggedIn }) {
                 <h3 className="font-semibold text-indigo-700 mb-1.5 text-base">
                   {event.name}
                 </h3>
-                <p className="text-sm text-gray-600 mb-2">{event.description}</p>
+                <p className="text-sm text-gray-600 mb-2">{event.description.slice(0,120)}...</p>
                 <div className="text-sm text-gray-500 space-y-1">
                   <div>
                     <CalendarDays size={14} className="inline mr-1" />{" "}

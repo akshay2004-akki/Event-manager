@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
@@ -36,19 +37,43 @@ const FAQ = () => {
   };
 
   return (
-    <section className="max-w-3xl mx-auto my-16 px-6 text-center">
+    <motion.section
+      className="max-w-3xl mx-auto my-16 px-6 text-center"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ staggerChildren: 0.2 }}
+    >
       {/* Header */}
-      <h2 className="text-4xl font-bold text-gray-900">FAQs</h2>
-      <p className="text-gray-600 mt-2">
+      <motion.h2
+        className="text-4xl font-bold text-gray-900"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        FAQs
+      </motion.h2>
+      <motion.p
+        className="text-gray-600 mt-2"
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
         Here are answers to some frequently asked questions about our event management platform.
-      </p>
+      </motion.p>
 
       {/* FAQ Items */}
       <div className="mt-8 space-y-4">
         {faqs.map((faq, index) => (
-          <div key={index} className="border my-9 border-gray-300 rounded-md">
+          <motion.div
+            key={index}
+            className="border my-9 border-gray-300 rounded-md text-left overflow-hidden"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
             <button
-              className="w-full p-4 text-left flex justify-between items-center text-gray-900 font-semibold"
+              className="w-full p-4 flex justify-between items-center text-gray-900 font-semibold focus:outline-none"
               onClick={() => toggleFAQ(index)}
             >
               {faq.question}
@@ -56,26 +81,42 @@ const FAQ = () => {
                 {openIndex === index ? "−" : "+"}
               </span>
             </button>
-            {openIndex === index && (
-              <p className="p-4 text-gray-700 border-t border-gray-300">
-                {faq.answer}
-              </p>
-            )}
-          </div>
+
+            <AnimatePresence initial={false}>
+              {openIndex === index && (
+                <motion.div
+                  key="content"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="p-4 pt-0 text-gray-700 border-t border-gray-300">
+                    {faq.answer}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
         ))}
       </div>
 
       {/* Contact Section */}
-      <div className="mt-12">
+      <motion.div
+        className="mt-12"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <h3 className="text-xl font-semibold">Still have questions?</h3>
         <p className="text-gray-600 mt-2">
           Reach out to us anytime for assistance.
         </p>
-        <button className="mt-4 px-6 py-2 border border-gray-900 rounded-md hover:bg-gray-100">
+        <button className="mt-4 px-6 py-2 border border-gray-900 rounded-md hover:bg-gray-100 transition">
           Contact
         </button>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 
