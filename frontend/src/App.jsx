@@ -22,6 +22,7 @@ import ScrollToTop from "./util/ScrollToTop.jsx";
 import UpcomingEvents from "./Components/UpcomingEvents.jsx";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import EventDescription from "./Components/EventDescription.jsx";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -77,6 +78,7 @@ function App() {
           {/* <Route path="/chat" element={<Chat senderId="67f275d5d84894ddd2c0b3a1" receiverId="67f19d0731ab4bf3b7a34411" />} /> */}
           <Route path="/editProfile" element={<EditProfile />} />
           <Route path="/cmptProf" element={<CompleteProfile />} />
+          <Route path="/eventDetails" element={<EventDescription/>}/>
         </Routes>
         <Footer />
       </Router>

@@ -1,12 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import EventDetails from "./EventDetails";
+import { useNavigate } from "react-router-dom";
 
 const EventsPage = () => {
   const [events, setEvents] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [selectedEvent, setSelectedEvent] = useState(null);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [eventType, setEventType] = useState("upcoming"); // New state for select field
+  const [filteredEvent, setFilteredEvent] = useState([])
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -15,7 +18,10 @@ const EventsPage = () => {
           `${import.meta.env.VITE_BACKEND_URL}/api/event/getEvent`,
           { withCredentials: true }
         );
+        console.log(res.data.events);
+        
         setEvents(res.data.events);
+        
       } catch (error) {
         console.log(error.message);
       } finally {
@@ -25,14 +31,32 @@ const EventsPage = () => {
     fetchEvents();
   }, []);
 
+  useEffect(()=>{
+    const filterEvents = ()=>{
+      if(eventType==="upcoming"){
+        const newEve = events.filter((e)=>new Date(e.dateTime).getTime() > Date.now());
+        console.log(newEve);
+        
+        setFilteredEvent(newEve);
+      }
+      else if(eventType==="past"){
+        const newEve = events.filter((e)=>new Date(e.dateTime).getTime() < Date.now());
+        setFilteredEvent(newEve);
+      }
+    }
+    filterEvents();
+  },[eventType, events]);
+
+  const route = useNavigate()
   const handleGetDetails = async (eventId) => {
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/api/event/${eventId}`,
         { withCredentials: true }
       );
-      setSelectedEvent(res.data[0]);
-      setIsModalOpen(true);
+      // setSelectedEvent(res.data[0]);
+      // setIsModalOpen(true);
+      route("/eventDetails", {state:{event : res.data[0]}})
     } catch (error) {
       console.log("Error fetching event details:", error.message);
     }
@@ -53,13 +77,25 @@ const EventsPage = () => {
     <div className="max-w-7xl mx-auto px-4 md:px-8 pt-24">
       {/* Header */}
       <section className="text-center">
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
-          Upcoming Events
+        <h1 className="text-3xl sm:text-4xl font-bold font-poppins text-gray-900">
+          {eventType.toUpperCase()} EVENTS
         </h1>
         <p className="text-gray-600 mt-2 text-sm sm:text-base">
           Stay updated with the latest events and opportunities on campus.
         </p>
       </section>
+
+      {/* Select Field */}
+      <div className="flex justify-end my-6">
+        <select
+          value={eventType}
+          onChange={(e) => setEventType(e.target.value)}
+          className="border border-gray-300 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
+          <option value="upcoming">Upcoming Events</option>
+          <option value="past">Past Events</option>
+        </select>
+      </div>
 
       {/* Events Section */}
       <section>
@@ -71,7 +107,7 @@ const EventsPage = () => {
             ? Array.from({ length: 6 }).map((_, index) => (
                 <SkeletonCard key={index} />
               ))
-            : events.map((event, index) => (
+            : filteredEvent.map((event, index) => (
                 <div
                   key={index}
                   className="border rounded-xl shadow-md overflow-hidden flex flex-col bg-white"
@@ -109,7 +145,7 @@ const EventsPage = () => {
       </section>
 
       {/* Modal */}
-      {isModalOpen && selectedEvent && (
+      {/* {isModalOpen && selectedEvent && (
         <div
           className="fixed inset-0 p-2 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
           role="dialog"
@@ -126,7 +162,7 @@ const EventsPage = () => {
                 onClick={() => setIsModalOpen(false)}
                 aria-label="Close"
               >
-                X 
+                X
               </button>
             </div>
             <h2 className="text-2xl font-bold text-indigo-700 mb-4">
@@ -143,7 +179,7 @@ const EventsPage = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

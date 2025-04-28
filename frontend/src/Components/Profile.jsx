@@ -23,6 +23,7 @@ function ProfileSection({ setLoggedIn }) {
   const [registeredEvents, setRegisteredEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [registered, setRegistered] = useState([])
 
   const route = useNavigate();
   const navigate = () => {
@@ -71,7 +72,7 @@ function ProfileSection({ setLoggedIn }) {
             }),
             location: item.eventId.location,
           }));
-
+        setRegistered(res.data)
         setRegisteredEvents(formattedEvents);
       } catch (error) {
         console.log("Error fetching registered events:", error.message);
@@ -325,7 +326,7 @@ function ProfileSection({ setLoggedIn }) {
             <h2 className="text-2xl font-bold text-indigo-700 mb-4">
               Event Details
             </h2>
-            <EventDetails event={selectedEvent} />
+            <EventDetails event={selectedEvent} registeredEvents={registered} />
             <div className="mt-6 flex justify-end">
               <button
                 onClick={() => setIsModalOpen(false)}

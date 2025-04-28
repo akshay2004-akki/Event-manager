@@ -183,7 +183,7 @@ export const registerForEvent = async (req, res) => {
       userRegistered: userId,
     });
 
-    res.status(200).json({ message: "Registered successfully!", event: eventRegistered });
+    res.status(200).json({ message: `Registered successfully for the event ${eventName}`, event:eventRegistered });
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
@@ -213,6 +213,20 @@ export const getRegisteredEvent = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+
+export const getNoOfEventCount = async(req,res)=>{
+  try {
+    const {eventId} = req.params;
+    if(!isValidObjectId(eventId)){
+      return res.status(400).json({error:"Invalid Event Id"});
+    }
+    const count = await RegisteredEvent.find({eventId}).countDocuments();
+
+    return res.status(200).json({count});
+  } catch (error) {
+    return res.status(500).json({error : error.message})
+  }
+}
 
 
 
