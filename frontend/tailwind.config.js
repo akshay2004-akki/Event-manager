@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+    content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
     theme: {
       extend: {
         colors: {
@@ -8,6 +8,7 @@ export default {
           maroon: "#a74b41",
           gold: "#d4af37",
         },
+        scrollbar: ['rounded'],
         animation: {
           fadeIn: 'fadeIn 0.3s ease-out',
         },

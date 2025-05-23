@@ -58,7 +58,6 @@ function Navbar({loggedIn}) {
             <Link onClick={handlLinkToggle} to="/" className="hover:text-amber-500">Home</Link>
             <Link onClick={handlLinkToggle} to="/events" className={`hover:text-amber-500 ${isAdmin?"block":"hidden"}`}>Create Events</Link>
             <Link onClick={handlLinkToggle} to="/eventRegistration" className={`hover:text-amber-500`}>Event Registration</Link>
-            <Link onClick={handlLinkToggle} to="/support" className="hover:text-amber-500">Chat Support</Link>
           </div>
         </div>
 
@@ -95,7 +94,6 @@ function Navbar({loggedIn}) {
           <Link onClick={handlLinkToggle} to="/" className="hover:text-amber-400">Home</Link>
           <Link onClick={handlLinkToggle} to="/events" className="hover:text-amber-400">Events</Link>
           <Link onClick={handlLinkToggle} to="/eventRegistration" className="hover:text-amber-400">Event Registration</Link>
-          <Link onClick={handlLinkToggle} to="/support" className="hover:text-amber-400">Chat Support</Link>
         </div>
       </div>
     </nav>

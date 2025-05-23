@@ -23,6 +23,7 @@ import UpcomingEvents from "./Components/UpcomingEvents.jsx";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import EventDescription from "./Components/EventDescription.jsx";
+import ChatSupport from "./Components/ChatSupport.jsx";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -60,11 +61,12 @@ function App() {
                 <UpcomingEvents/>
                 <Team />
                 <FAQ />
+                <ChatSupport/>
               </>
             }
           />
-          <Route path="/eventRegistration" element={<EventsPage />} />
-          <Route path="/events" element={<CreateEvents />} />
+          <Route path="/eventRegistration" element={<><EventsPage /> <ChatSupport/></>} />
+          <Route path="/events" element={<><CreateEvents /> <ChatSupport/></>} />
           <Route path="/events/:eventId" element={<EventDetails />} />
           <Route
             path="/login"
@@ -78,7 +80,8 @@ function App() {
           {/* <Route path="/chat" element={<Chat senderId="67f275d5d84894ddd2c0b3a1" receiverId="67f19d0731ab4bf3b7a34411" />} /> */}
           <Route path="/editProfile" element={<EditProfile />} />
           <Route path="/cmptProf" element={<CompleteProfile />} />
-          <Route path="/eventDetails" element={<EventDescription/>}/>
+          <Route path="/eventDetails" element={<><EventDescription/> <ChatSupport/></>}/>
+          {/* <Route path="/support" element={} /> */}
         </Routes>
         <Footer />
       </Router>

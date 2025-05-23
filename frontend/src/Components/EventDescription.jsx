@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
@@ -156,7 +157,7 @@ function EventDescription() {
 
   useEffect(()=>{
     const isAlreadyRegistered = registeredEvents.some((e)=>{
-        return e.eventId._id===eventId || e.eventId.dateTime < Date.now()
+        return e.eventId._id===eventId || new Date(e.eventId.dateTime).getTime() < Date.now()
     });
     setRegistered(isAlreadyRegistered)
   },[eventId, registeredEvents])

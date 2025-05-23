@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
@@ -113,7 +114,7 @@ const EventDetails = ({ event, registeredEvents }) => {
   };
   useEffect(()=>{
       const isAlreadyRegistered = registeredEvents.some((e)=>{
-          return e.eventId._id===event._id || e.eventId.dateTime < Date.now()
+          return e.eventId._id===event._id || new Date(e.eventId.dateTime).getTime() < Date.now()
       });
       setRegistered(isAlreadyRegistered)
     },[event, registeredEvents])

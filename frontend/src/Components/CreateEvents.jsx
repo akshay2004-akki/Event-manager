@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import axios from "axios";
