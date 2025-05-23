@@ -22,6 +22,7 @@ function EventDescription() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [registered, setRegistered] = useState(false)
+  const [registered2, setRegistered2] = useState(false)
   const [userId, setUserId] = useState("");
   const eventId = event._id;
   const [counts, setCounts] = useState(0);
@@ -155,12 +156,20 @@ function EventDescription() {
     isRegistered();
   },[])
 
-  useEffect(()=>{
-    const isAlreadyRegistered = registeredEvents.some((e)=>{
-        return e.eventId._id===eventId || new Date(e.eventId.dateTime).getTime() < Date.now()
-    });
-    setRegistered(isAlreadyRegistered)
-  },[eventId, registeredEvents])
+  useEffect(() => {
+  const isAlreadyRegistered = registeredEvents.some((e) => {
+    return e.eventId._id === eventId && new Date(e.eventId.dateTime).getTime() >= Date.now();
+  });
+  setRegistered(isAlreadyRegistered);
+}, [eventId, registeredEvents]);
+
+useEffect(() => {
+  const isAlreadyRegistered = registeredEvents.some((e) => {
+    return e.eventId._id === eventId;
+  });
+  setRegistered2(isAlreadyRegistered);
+}, [eventId, registeredEvents]);
+
 
   useEffect(()=>{
     const getCount = async()=>{
@@ -316,7 +325,7 @@ function EventDescription() {
           >
             <button
               onClick={() => handleRegister(event._id, event.eventName)}
-              className={`px-6 py-3 rounded-full bg-gradient-to-r from-green-500 to-teal-600 text-white shadow-lg hover:shadow-2xl hover:scale-105 transition duration-300 ${registered?"hidden":"block"}`}
+              className={`px-6 py-3 rounded-full bg-gradient-to-r from-green-500 to-teal-600 text-white shadow-lg hover:shadow-2xl hover:scale-105 transition duration-300 ${registered || registered2?"hidden":"block"}`}
             >
               Register Now
             </button>
