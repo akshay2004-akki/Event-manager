@@ -35,8 +35,8 @@ app.use(
     }),
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 90, // 3 months
-      httpOnly: true,
-      secure: false, // ✅ false for localhost (no HTTPS)
+      httpOnly: false,
+      secure: true, // ✅ false for localhost (no HTTPS)
       sameSite: "lax", // ✅ lax is good for local dev
     },
   })
