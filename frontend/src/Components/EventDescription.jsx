@@ -14,6 +14,7 @@ import {
   Phone,
   LogIn,
 } from "lucide-react";
+//  import OpenAI from "openai";
 
 function EventDescription() {
 //   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -45,6 +46,7 @@ function EventDescription() {
 //     };
 //     fetchData();
 //   }, [eventId]);
+
 
   const formattedDate = event?.dateTime
     ? new Date(event?.dateTime).toLocaleDateString()

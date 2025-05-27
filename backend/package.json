@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "build": "vite build"
   },
   "author": "Akshay",
   "license": "ISC",
@@ -30,5 +31,8 @@
     "socket.io-client": "^4.8.1",
     "streamifier": "^0.1.1",
     "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
   }
 }
